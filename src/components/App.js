@@ -1,5 +1,6 @@
 import Users from "./Users";
 import Counter from "./Counter";
+import TodoList from "./TodoList";
 
 function App({ name, lastname, age, subjects, ...props }) {
   //antes App(props)
@@ -44,6 +45,7 @@ function App({ name, lastname, age, subjects, ...props }) {
 
       <Counter />
       <Users />
+      <TodoList />
     </>
   );
 }
