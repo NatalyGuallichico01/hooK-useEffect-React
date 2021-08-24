@@ -1,13 +1,36 @@
 import { useEffect, useRef, useState } from "react";
+import "../styles/todoList.css";
 const TodoList = () => {
-  const [todos, setTodos] = useState(["a", "b", "c"]);
+  const [todos, setTodos] = useState([]);
   const [completed, setCompleted] = useState([]);
+  const [darkMode, setDarkMode] = useState([false]);
   //huks
   const inputRef = useRef(null);
   //poner todos los hooks al inicio
   useEffect(() => {
-    console.log("TodoList Mounted");
-  });
+    console.log("useEffect TodoList (en cada renderizada) ");
+  }); //se ejecuta en cada renderizada del componente
+  useEffect(() => {
+    console.log("useEffect TodoList (solo cuando se monta)");
+  }, []); //si la lista de dependencias es vacia {[]} el arreglo vacio se ejecuta solo cuando se montan un componente
+  useEffect(() => {
+    console.log("useEffect TodoList (completed)");
+  }, [completed]); //se ejecuta solo cuando se actualiza la variable de estado "completed"
+  useEffect(() => {
+    console.log("useEffect TodoList (completed, todo)");
+    if (todos.length > 0) {
+      document.title = `tienes ${todos.length} tareas pendientes`;
+    } else {
+      document.title = "No tienes  tareas pendientes";
+    }
+  }, [todos]); //se ejecuta solo cuando se actualiza la variable de estado "completed" y "todos"
+  useEffect(() => {
+    if (darkMode) {
+      console.log("DARK");
+    } else {
+      console.log("LIGHT");
+    }
+  }, [darkMode]);
   const handleAddTask = () => {
     // const newTodo = document.querySelector("#todo").value;
     //setTodos((prevState) => [...prevState, newTodo]);
@@ -33,8 +56,14 @@ const TodoList = () => {
     setCompleted((prevState) => [...prevState, taskComplete]);
   };
   //el ref={inputRef} es parte del huks
+  const handleSetDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
   return (
-    <div>
+    <div className={darkMode ? "dark-mood" : ""}>
+      <button onClick={handleSetDarkMode}>
+        {darkMode ? "Desactivar" : "Activar"} modo oscuro
+      </button>
       <div>
         <label htmlForm="Todo">Nombre de la Tarea</label>
         <input type="text" id="todo" ref={inputRef} />
