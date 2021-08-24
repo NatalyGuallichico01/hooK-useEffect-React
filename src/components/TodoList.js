@@ -1,10 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 const TodoList = () => {
   const [todos, setTodos] = useState(["a", "b", "c"]);
   const [completed, setCompleted] = useState([]);
   //huks
   const inputRef = useRef(null);
-
+  //poner todos los hooks al inicio
+  useEffect(() => {
+    console.log("TodoList Mounted");
+  });
   const handleAddTask = () => {
     // const newTodo = document.querySelector("#todo").value;
     //setTodos((prevState) => [...prevState, newTodo]);
