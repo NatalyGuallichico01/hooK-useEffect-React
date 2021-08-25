@@ -2,6 +2,7 @@ import Users from "./Users";
 import Counter from "./Counter";
 import TodoList from "./TodoList";
 import { useState } from "react";
+import UserInfo from "./UserInfo";
 
 function App({ name, lastname, age, subjects, ...props }) {
   const [showTodo, setShowTodo] = useState(true);
@@ -30,6 +31,8 @@ function App({ name, lastname, age, subjects, ...props }) {
 
   return (
     <>
+      <UserInfo />
+      <hr />
       <div className={"greeting"}>
         Hola {name} {lastname} !!!
       </div>
