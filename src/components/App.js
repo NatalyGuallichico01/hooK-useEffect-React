@@ -1,8 +1,10 @@
 import Users from "./Users";
 import Counter from "./Counter";
 import TodoList from "./TodoList";
+import { useState } from "react";
 
 function App({ name, lastname, age, subjects, ...props }) {
+  const [showTodo, setShowTodo] = useState(true);
   //antes App(props)
   //const name="Natilu";
   //const lastname="Guallichico";
@@ -22,6 +24,9 @@ function App({ name, lastname, age, subjects, ...props }) {
 
   const allTwo = arr1.every((x) => x === 2);
   //console.log("allTwo", allTwo);
+  const handleToggleTodoList = () => {
+    setShowTodo(!showTodo);
+  };
 
   return (
     <>
@@ -45,7 +50,12 @@ function App({ name, lastname, age, subjects, ...props }) {
 
       <Counter />
       <Users />
-      <TodoList />
+      <div>
+        <button onClick={handleToggleTodoList}>
+          {showTodo ? "Ocultar" : "Mostrar"} lista de Tareas
+        </button>
+      </div>
+      {showTodo && <TodoList />}
     </>
   );
 }
